@@ -1,0 +1,102 @@
+{
+    "latex-workshop.latex.autoBuild.cleanAndRetry.enabled": false,
+    "latex-workshop.latex.tools": [
+        // latexmk を利用した xelatex によるビルドコマンド
+        {
+          "name": "Latexmk (XeLaTeX)",
+          "command": "latexmk",
+          "args": [
+            "-f", "-gg", "-pv", "-xelatex", "-synctex=1", "-interaction=nonstopmode", "-file-line-error", "%DOC%"
+          ]
+        },
+        // latexmk を利用した uplatex によるビルドコマンド
+        {
+          "name": "Latexmk (upLaTeX)",
+          "command": "latexmk",
+          "args": [
+            "-f", "-gg", "-pv", "-synctex=1", "-interaction=nonstopmode", "-file-line-error", "%DOC%"
+          ]
+        },
+        // latexmk を利用した platex によるビルドコマンド
+        // 古い LaTeX のテンプレートを使いまわしている (ドキュメントクラスが jreport や jsreport ) 場合のため
+        {
+          "name": "Latexmk (pLaTeX)",
+          "command": "latexmk",
+          "args": [
+            "-f", "-gg", "-pv", "-latex='platex'", "-latexoption='-kanji=utf8 -no-guess-input-env'", "-synctex=1", "-interaction=nonstopmode", "-file-line-error", "%DOC%"
+          ]
+        },
+        // latexmk を利用した lualatex によるビルドコマンド
+        {
+          "name": "Latexmk (LuaLaTeX)",
+          "command": "latexmk",
+          "args": [
+            "-f", "-gg", "-pv", "-lualatex", "-synctex=1", "-interaction=nonstopmode", "-file-line-error", "%DOC%"
+          ]
+        },
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+          },
+          {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ]
+          },
+
+    ],
+
+    // latex-workshop.latex.recipes: Recipe の定義
+    "latex-workshop.latex.recipes": [
+
+        // XeLaTeX で書かれた文書のビルドレシピ
+        {
+          "name": "XeLaTeX",
+          "tools": [
+            "Latexmk (XeLaTeX)"
+          ]
+        },
+        // LaTeX(upLaTeX) で書かれた文書のビルドレシピ
+        {
+          "name": "upLaTeX",
+          "tools": [
+            "Latexmk (upLaTeX)"
+          ]
+        },
+        // LaTeX(pLaTeX) で書かれた文書のビルドレシピ
+        {
+          "name": "pLaTeX",
+          "tools": [
+            "Latexmk (pLaTeX)"
+          ]
+        },
+        // LuaLaTeX で書かれた文書のビルドレシピ
+        {
+          "name": "LuaLaTeX",
+          "tools": [
+            "Latexmk (LuaLaTeX)"
+          ]
+        },
+        {
+            "name": "pdflatex -> bibtex -> pdflatex*2",
+            "tools": [
+                "pdflatex",
+                "bibtex",
+                "pdflatex",
+                "pdflatex"
+            ]
+        },
+    ],
+    "latex-workshop.latex.autoClean.run": "onFailed",
+    "latex-workshop.latex.autoBuild.run": "never",
+    "kite.showWelcomeNotificationOnStartup": false,
+    "latex-workshop.view.pdf.viewer": "tab",
+}
